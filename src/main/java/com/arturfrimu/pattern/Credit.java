@@ -1,31 +1,27 @@
 package com.arturfrimu.pattern;
 
+import lombok.Builder;
+
 import java.time.LocalDate;
 
+@Builder
 public class Credit {
     private final long id;
     private final LocalDate startDate;
     private final LocalDate endDate;
-    private double percent;
-    private double sum;
-
-    public Credit(long id, LocalDate startDate, LocalDate endDate, double sum, double percent) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.sum = sum;
-        this.percent = percent;
-    }
+    private final Double percent;
+    private final Double sum;
+    private SumBehavior sumCalculator;
 
     public double calculateSum() {
-        return sum + (sum * (percent / 100));
+        return sumCalculator.calculateSum(sum, percent);
     }
 
     public double calculateSumOver() {
-        return sum * (percent / 100);
+        return sumCalculator.calculateSumOver(sum, percent);
     }
 
-    public void setPercent(double percent) {
-        this.percent = percent;
+    public void setSumCalculator(SumBehavior sumCalculator) {
+        this.sumCalculator = sumCalculator;
     }
 }
