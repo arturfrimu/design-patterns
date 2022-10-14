@@ -1,4 +1,4 @@
-package com.arturfrimu.pattern;
+package com.arturfrimu.pattern.strategy;
 
 import lombok.Builder;
 
