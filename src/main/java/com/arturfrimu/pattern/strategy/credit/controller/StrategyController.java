@@ -1,7 +1,7 @@
-package com.arturfrimu.pattern.strategy.controller;
+package com.arturfrimu.pattern.strategy.credit.controller;
 
-import com.arturfrimu.pattern.strategy.Credit;
-import com.arturfrimu.pattern.strategy.SumStrategy;
+import com.arturfrimu.pattern.strategy.credit.Credit;
+import com.arturfrimu.pattern.strategy.credit.SumStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

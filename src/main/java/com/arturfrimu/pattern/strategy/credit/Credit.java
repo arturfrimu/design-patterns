@@ -1,4 +1,4 @@
-package com.arturfrimu.pattern.strategy;
+package com.arturfrimu.pattern.strategy.credit;
 
 import lombok.Builder;
 

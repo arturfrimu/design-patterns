@@ -1,6 +1,6 @@
-package com.arturfrimu.pattern.strategy.service;
+package com.arturfrimu.pattern.strategy.credit.service;
 
-import com.arturfrimu.pattern.strategy.SumStrategy;
+import com.arturfrimu.pattern.strategy.credit.SumStrategy;
 import org.springframework.stereotype.Service;
 
 @Service
