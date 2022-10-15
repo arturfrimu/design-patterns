@@ -1,4 +1,4 @@
-package com.arturfrimu.pattern.command.dinerSpring;
+package com.arturfrimu.pattern.command.dinner.spring.receiver;
 
 import org.springframework.stereotype.Service;
 
@@ -7,7 +7,7 @@ public class SteakCookService implements CookService {
 
     @Override
     public void cook() {
-        System.out.println("CookService.makeSteak()... Making steak...");
+        System.out.println("\t\tSTEAK COOK: - I will cook this stake with love!");
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.arturfrimu.pattern.command.diner;
+package com.arturfrimu.pattern.command.dinner.java;
 
 public class Waitress {
     private final String name;

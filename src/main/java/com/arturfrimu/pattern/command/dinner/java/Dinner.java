@@ -1,9 +1,9 @@
-package com.arturfrimu.pattern.command.diner;
+package com.arturfrimu.pattern.command.dinner.java;
 
-import com.arturfrimu.pattern.command.diner.order.BurgerAndFriesOrder;
-import com.arturfrimu.pattern.command.diner.order.SteakOrder;
+import com.arturfrimu.pattern.command.dinner.java.order.BurgerAndFriesOrder;
+import com.arturfrimu.pattern.command.dinner.java.order.SteakOrder;
 
-public class Diner {
+public class Dinner {
     public static void main(String[] args) {
         Cook cook = new Cook("PanPan");
         Waitress waitress = new Waitress("Elena");

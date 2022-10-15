@@ -1,5 +1,7 @@
-package com.arturfrimu.pattern.command.dinerSpring;
+package com.arturfrimu.pattern.command.dinner.spring.controller;
 
+import com.arturfrimu.pattern.command.dinner.spring.client.CustomerService;
+import com.arturfrimu.pattern.command.dinner.spring.order.OrderCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,16 +19,18 @@ public class DinerController {
     private final CustomerService customer;
 
     @Autowired
-    private final Map<String, Order> orders = new HashMap<>();
+    private final Map<String, OrderCommand> orders = new HashMap<>();
 
     @GetMapping()
     public void order(@RequestParam("order") String order) {
-        Order order1 = orders.get(order);
-        customer.createOrder(order1);
+        customer.createOrder(orders.get(order));
         customer.hungry();
     }
 
-    public static void main(String[] args) {
-
+    @GetMapping("/everything")
+    public void giveMeEverything() {
+        OrderCommand[] objects = orders.values().toArray(new OrderCommand[0]);
+        customer.createOrder(objects);
+        customer.hungry();
     }
 }

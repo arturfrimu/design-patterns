@@ -1,13 +1,13 @@
-package com.arturfrimu.pattern.command.diner.order;
+package com.arturfrimu.pattern.command.dinner.java.order;
 
-import com.arturfrimu.pattern.command.diner.Cook;
-import com.arturfrimu.pattern.command.diner.Order;
+import com.arturfrimu.pattern.command.dinner.java.Cook;
+import com.arturfrimu.pattern.command.dinner.java.Order;
 
-public class BurgerAndFriesOrder implements Order {
+public class SteakOrder implements Order {
     private final String name;
     Cook cook;
 
-    public BurgerAndFriesOrder(String name, Cook cook) {
+    public SteakOrder(String name, Cook cook) {
         this.name = name;
         System.out.println("Creating order " + name + "...");
         System.out.println("Inject cook " + cook + " in order " + name + "...");
@@ -16,8 +16,7 @@ public class BurgerAndFriesOrder implements Order {
 
     public void orderUp() {
         System.out.println("Start : " + name + ".orderUp()...");
-        cook.makeBurger();
-        cook.makeFries();
+        cook.makeSteak();
         System.out.println("End : " + name + ".orderUp()...");
     }
 

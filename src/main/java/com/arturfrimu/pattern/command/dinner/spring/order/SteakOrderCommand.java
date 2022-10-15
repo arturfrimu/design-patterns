@@ -1,14 +1,13 @@
-package com.arturfrimu.pattern.command.dinerSpring.order;
+package com.arturfrimu.pattern.command.dinner.spring.order;
 
-import com.arturfrimu.pattern.command.dinerSpring.CookService;
-import com.arturfrimu.pattern.command.dinerSpring.Order;
+import com.arturfrimu.pattern.command.dinner.spring.receiver.CookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class SteakOrder implements Order {
+public class SteakOrderCommand implements OrderCommand {
 
     /**
      * Qualifier value and field name need to be equals to BeanName (steakCookService)
@@ -16,12 +15,15 @@ public class SteakOrder implements Order {
     @Qualifier("steakCookService")
     private final CookService steakCookService;
 
-    public void orderUp() {
+    @Override
+    public void execute() {
+        System.out.println("\t- WAITRESS: SteakCook, cook a steak please!");
         steakCookService.cook();
+        System.out.println("\t- WAITRESS: Thank you very much! It looks great!");
     }
 
     @Override
     public String toString() {
-        return "SteakOrder";
+        return "Steak";
     }
 }
