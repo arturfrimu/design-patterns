@@ -40,13 +40,12 @@ public class RemoteControl {
     }
 
     public String toString() {
-        StringBuffer stringBuff = new StringBuffer();
+        StringBuilder stringBuff = new StringBuilder();
         stringBuff.append("\n------ Remote Control -------\n");
         for (int i = 0; i < onCommands.length; i++) {
-            stringBuff.append("[slot " + i + "] " + onCommands[i].getClass().getName()
-                    + "    " + offCommands[i].getClass().getName() + "\n");
+            stringBuff.append("[slot ").append(i).append("] ").append(onCommands[i].getClass().getSimpleName()).append("    ").append(offCommands[i].getClass().getSimpleName()).append("\n");
         }
-        stringBuff.append("[undo] " + undoCommand.getClass().getName() + "\n");
+        stringBuff.append("[undo] ").append(undoCommand.getClass().getName()).append("\n");
         return stringBuff.toString();
     }
 }

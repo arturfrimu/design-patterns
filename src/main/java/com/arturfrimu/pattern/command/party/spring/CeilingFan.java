@@ -10,8 +10,8 @@ public class CeilingFan {
     public static final int MEDIUM = 2;
     public static final int LOW = 1;
     public static final int OFF = 0;
-    String location;
-    int speed;
+    private String location;
+    private int speed;
 
     public CeilingFan(String location) {
         this.location = location;
