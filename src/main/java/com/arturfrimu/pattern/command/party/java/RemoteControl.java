@@ -4,9 +4,9 @@ package com.arturfrimu.pattern.command.party.java;
 // This is the invoker
 //
 public class RemoteControl {
-    Command[] onCommands;
-    Command[] offCommands;
-    Command undoCommand;
+    private final Command[] onCommands;
+    private final Command[] offCommands;
+    private Command undoCommand;
 
     public RemoteControl() {
         onCommands = new Command[7];

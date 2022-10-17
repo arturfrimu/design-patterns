@@ -1,13 +1,52 @@
 package com.arturfrimu.pattern.command.party.java;
 
-public class RemoteLoader {
+import java.util.Scanner;
 
+public class RemoteLoader {
     public static void main(String[] args) {
         RemoteControl remoteControl = new RemoteControl();
 
         Light light1 = new Light("Living Room");
-        LightOnCommand lightOn = new LightOnCommand(light1);
-        LightOffCommand lightOff = new LightOffCommand(light1);
+        Light light2 = new Light("Bathroom");
+
+        LightOnCommand lightOnLivingRoom = new LightOnCommand(light1);
+        LightOffCommand lightOffLivingRoom = new LightOffCommand(light1);
+
+        LightOnCommand lightOnBathroom = new LightOnCommand(light2);
+        LightOffCommand lightOffBathroom = new LightOffCommand(light2);
+
+        remoteControl.setCommand(0, lightOnLivingRoom, lightOffLivingRoom);
+        remoteControl.setCommand(1, lightOnBathroom, lightOffBathroom);
+
+        Scanner sc = new Scanner(System.in);
+        boolean active = true;
+        while (active) {
+            String input = sc.nextLine();
+            switch (input) {
+                case "llon":
+                    remoteControl.onButtonWasPushed(0);
+                    break;
+                case "lloff":
+                    remoteControl.offButtonWasPushed(0);
+                    break;
+                case "bon":
+                    remoteControl.onButtonWasPushed(1);
+                    break;
+                case "boff":
+                    remoteControl.offButtonWasPushed(1);
+                    break;
+                default:
+                    active = false;
+            }
+        }
+    }
+
+    public void main1(String[] args) {
+        RemoteControl remoteControl = new RemoteControl();
+
+        Light light = new Light("Living Room");
+        LightOnCommand lightOn = new LightOnCommand(light);
+        LightOffCommand lightOff = new LightOffCommand(light);
 
         //        System.out.println(remoteControl);
         System.out.println("\n");
@@ -51,12 +90,12 @@ public class RemoteLoader {
         MacroCommand macro1 = new MacroCommand(partyOn);
         MacroCommand macro2 = new MacroCommand(partyOff);
 
-        System.out.println(remoteControl);
+//        System.out.println(remoteControl);
         System.out.println("\n");
         remoteControl.setCommand(4, macro1, macro2);
         remoteControl.onButtonWasPushed(4);
         remoteControl.offButtonWasPushed(4);
 
-        System.out.println(remoteControl);
+//        System.out.println(remoteControl);
     }
 }

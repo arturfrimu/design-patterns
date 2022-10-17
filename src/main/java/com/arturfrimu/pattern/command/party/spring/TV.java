@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class TV {
-    String location;
-    int channel;
+    private String location;
+    private int channel;
 
     public TV(String location) {
         this.location = location;

@@ -3,6 +3,7 @@ package com.arturfrimu.pattern.command.party.spring;
 import com.arturfrimu.pattern.command.party.spring.command.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -17,74 +18,35 @@ public class RemoteLoader {
     @Autowired
     private final Map<String, Command> commands = new HashMap<>();
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/test")
-    public String test() {
-        return "WORK";
-    }
-
-
-// http://localhost:8080/command/macro?onCommand=hottubOnCommand&onCommand=lightOnCommand&offCommand=hottubOffCommand&offCommand=lightOffCommand
+// http://localhost:8080/command/macro?
+// onCommand=hottubOnCommand&
+// offCommand=lightOffCommand
+// onCommand=lightOnCommand
+// &offCommand=hottubOffCommand&
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping
-    public String command(@RequestParam("slot") SLOT slot, @RequestParam("onCommand") String[] onCommand, @RequestParam("offCommand") String[] offCommand) {
+    public ResponseEntity<String> addMacroCommand(@RequestParam("slot") SLOT slot, @RequestParam("onCommand") String[] onCommand, @RequestParam("offCommand") String[] offCommand) {
         Command[] onCommands = getCommandComponentsByName(onCommand);
         Command[] offCommands = getCommandComponentsByName(offCommand);
-
         remoteControl.setCommand(SLOT.getValue(slot), new MacroCommand(onCommands), new MacroCommand(offCommands));
-        return "add commands";
-    }
-
-    public enum SLOT {
-        KITCHEN(0), BATHROOM(1);
-
-        private final int value;
-
-        SLOT(int i) {
-            this.value = i;
-        }
-
-        public static SLOT getValue(String slot) {
-            return SLOT.valueOf(slot);
-        }
-
-        public static SLOT getValue(int value) {
-            return Arrays.stream(SLOT.values()).filter(s -> s.value == value).findFirst().orElse(null);
-        }
-
-        public static int getValue(SLOT slot) {
-            return slot.value;
-        }
+        return ResponseEntity.ok("Success");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/lightOn")
-    public String lightOn(@RequestParam("slot") SLOT slot) {
-        remoteControl.onButtonWasPushed(SLOT.getValue(slot));
-        return "roomLightOn";
+    @GetMapping("/add")
+    public ResponseEntity<String> addCommand(@RequestParam("slot") SLOT slot, @RequestParam("onCommand") String onCommand, @RequestParam("offCommand") String offCommand) {
+        remoteControl.setCommand(SLOT.getValue(slot), commands.get(onCommand), commands.get(offCommand));
+        return ResponseEntity.ok("Success");
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/lightOff")
-    public String lightOff(@RequestParam("slot") SLOT slot) {
-        remoteControl.offButtonWasPushed(SLOT.getValue(slot));
-        return "roomLightOff";
+    @GetMapping("/buttonWasPushed")
+    public boolean lightOn(@RequestParam("slot") SLOT slot, @RequestParam("onOff") boolean onOff) {
+        if (onOff) remoteControl.onButtonWasPushed(SLOT.getValue(slot));
+        else remoteControl.offButtonWasPushed(SLOT.getValue(slot));
+        return !onOff;
     }
-
-//    @CrossOrigin(origins = "http://localhost:3000")
-//    @GetMapping("/bathRoomLightOn")
-//    public String bathRoomLightOn(@RequestParam("slot") SLOT slot) {
-//        remoteControl.onButtonWasPushed(SLOT.getValue(slot));
-//        return "roomLightOn";
-//    }
-//
-//    @CrossOrigin(origins = "http://localhost:3000")
-//    @GetMapping("/bathRoomLightOff")
-//    public String bathRoomLightOff(@RequestParam("slot") SLOT slot) {
-//        remoteControl.offButtonWasPushed(SLOT.getValue(slot));
-//        return "roomLightOff";
-//    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/add/on")
@@ -116,10 +78,10 @@ public class RemoteLoader {
         // TODO: 16/10/2022
     }
 
-    private Command[] getCommandComponentsByName(@RequestParam("onCommand") String[] onCommand) {
-        Command[] onCommands = new Command[onCommand.length];
-        for (int i = 0; i < onCommand.length; i++) {
-            Command command = commands.get(onCommand[i]);
+    private Command[] getCommandComponentsByName(String[] commandsName) {
+        Command[] onCommands = new Command[commandsName.length];
+        for (int i = 0; i < commandsName.length; i++) {
+            Command command = commands.get(commandsName[i]);
             onCommands[i] = command;
         }
         return onCommands;
