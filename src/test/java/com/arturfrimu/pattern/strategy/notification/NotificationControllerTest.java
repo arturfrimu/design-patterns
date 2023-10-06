@@ -36,6 +36,7 @@ class NotificationControllerTest {
         request.setContent("Hello, email world!");
         request.setSender("test@example.com");
         request.setRecipient("recipient@example.com");
+        request.setEmailSpecificContent("emailSpecificContent");
 
         HttpEntity<NotificationRequest> entity = new HttpEntity<>(request);
 
@@ -50,10 +51,26 @@ class NotificationControllerTest {
         request.setContent("Hello, sms world!");
         request.setSender("123456789");
         request.setRecipient("987654321");
+        request.setSmsSpecificContent("smsSpecificContent");
 
         HttpEntity<NotificationRequest> entity = new HttpEntity<>(request);
 
         ResponseEntity<String> response = restTemplate.exchange(baseUrl + "?strategyType=SMS", POST, entity, String.class);
+
+        assertEquals("OK", response.getBody());
+    }
+
+    @Test
+    void testSendNotification_AppStrategy() {
+        NotificationRequest request = new NotificationRequest();
+        request.setContent("Hello, app world!");
+        request.setSender("123456789");
+        request.setRecipient("987654321");
+        request.setAppSpecificContent("appSpecificContent");
+
+        HttpEntity<NotificationRequest> entity = new HttpEntity<>(request);
+
+        ResponseEntity<String> response = restTemplate.exchange(baseUrl + "?strategyType=APP", POST, entity, String.class);
 
         assertEquals("OK", response.getBody());
     }

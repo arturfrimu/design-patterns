@@ -42,5 +42,8 @@ public class NotificationController {
         private String content;
         private String sender;
         private String recipient;
+        private String emailSpecificContent;
+        private String smsSpecificContent;
+        private String appSpecificContent;
     }
 }

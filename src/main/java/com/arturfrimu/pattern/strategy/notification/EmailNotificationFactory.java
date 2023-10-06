@@ -10,7 +10,7 @@ public class EmailNotificationFactory implements NotificationFactory {
 
     @Override
     public Notification createNotification(NotificationRequest request) {
-        return new EmailNotification(request.getContent(), request.getSender(), request.getRecipient());
+        return new EmailNotification(request.getContent(), request.getSender(), request.getRecipient(), request.getEmailSpecificContent());
     }
 
     @Override

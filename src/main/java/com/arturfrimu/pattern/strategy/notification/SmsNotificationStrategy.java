@@ -8,11 +8,12 @@ public class SmsNotificationStrategy implements NotificationStrategy<SmsNotifica
 
     @Override
     public void sendNotification(SmsNotification notification) {
-        System.out.println(String.format(
-                "Sending email with next parameters.\n\tcontent: %s\n\tsender: %s\n\trecipient: %s\n",
+        System.out.printf(
+                "Sending sms with next parameters.\n\tcontent: %s\n\tsender: %s\n\trecipient: %s\n\tsmsSpecifiContent: %s\n",
                 notification.content,
                 notification.sender,
-                notification.recipient
-        ));
+                notification.recipient,
+                notification.getSmsSpecificContent()
+        );
     }
 }
