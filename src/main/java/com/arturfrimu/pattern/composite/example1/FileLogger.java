@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileLogger implements Logger {
+public class FileLogger extends AbstractLogger {
 
-    private boolean isEnabled;
     private final File file;
 
     public FileLogger(File file, boolean isEnabled) {
@@ -16,7 +15,6 @@ public class FileLogger implements Logger {
 
     public FileLogger(File file) {
         this.file = file;
-        this.isEnabled = false;
     }
 
     @Override
@@ -27,20 +25,5 @@ public class FileLogger implements Logger {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.isEnabled;
-    }
-
-    @Override
-    public void enable() {
-        this.isEnabled = true;
-    }
-
-    @Override
-    public void disable() {
-        this.isEnabled = false;
     }
 }
