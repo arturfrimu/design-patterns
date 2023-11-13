@@ -18,7 +18,24 @@ public class CompositeLogger implements Logger {
     @Override
     public void log(String message) {
         for (Logger logger : this.loggers) {
-            logger.log(message);
+            if (logger.isEnabled()) {
+                logger.log(message);
+            }
         }
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+
+    @Override
+    public void enable() {
+        throw new UnsupportedOperationException("Cannot enable/disable CompositeLogger directly.");
+    }
+
+    @Override
+    public void disable() {
+        throw new UnsupportedOperationException("Cannot enable/disable CompositeLogger directly.");
     }
 }
