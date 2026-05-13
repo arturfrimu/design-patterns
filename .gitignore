@@ -35,5 +35,3 @@ build/
 .mvn
 mvnw.cmd
 mvnw
-
-src/main/java/com/arturfrimu/pattern/strategy/fly/java
