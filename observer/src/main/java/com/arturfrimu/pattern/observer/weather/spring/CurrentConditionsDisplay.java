@@ -3,7 +3,7 @@ package com.arturfrimu.pattern.observer.weather.spring;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 @Service
 @RequiredArgsConstructor

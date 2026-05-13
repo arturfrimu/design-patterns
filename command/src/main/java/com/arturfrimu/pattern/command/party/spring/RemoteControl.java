@@ -4,7 +4,7 @@ import com.arturfrimu.pattern.command.party.spring.command.Command;
 import com.arturfrimu.pattern.command.party.spring.command.NoCommand;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 //
 // This is the invoker
